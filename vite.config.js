@@ -1,13 +1,9 @@
 import { resolve } from 'path';
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
 import VitePluginBrowserSync from 'vite-plugin-browser-sync'
 
-// // https://vitejs.dev/config/
-// export default defineConfig({
-//   plugins: [vue()],
-// })
-
+// https://vitejs.dev/config/
 export default defineConfig({
   base: './',
   plugins: [
@@ -20,16 +16,6 @@ export default defineConfig({
     }),
     VitePluginBrowserSync()
   ],
-  configureServer: app => {
-    app.use(
-      require("sass").middleware({
-        src: __dirname,
-        dest: __dirname,
-        outputStyle: "compressed",
-        prefix: "/",
-      })
-    );
-  },
   resolve: {
     alias: {
       '@': resolve(__dirname, '/src'),
@@ -41,8 +27,18 @@ export default defineConfig({
       output: {
         entryFileNames: `assets/[name].js`,
         chunkFileNames: `assets/[name].js`,
-        assetFileNames: `assets/[name].[ext]`,
+        assetFileNames: `assets/[name].[hash].[ext]`,
       },
     },
+  },
+  configureServer: app => {
+    app.use(
+      require("sass").middleware({
+        src: __dirname,
+        dest: __dirname,
+        outputStyle: "compressed",
+        prefix: "/",
+      })
+    );
   },
 });

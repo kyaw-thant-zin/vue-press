@@ -132,6 +132,21 @@ function v_1_0_1_widgets_init() {
 }
 add_action( 'widgets_init', 'v_1_0_1_widgets_init' );
 
+add_theme_support('title-tag');
+function change_title_separator( $sep ){
+  $sep = ' | ';
+  return $sep;
+}
+add_filter( 'document_title_separator', 'change_title_separator' );
+
+// Remove all default WP template redirects/lookups
+remove_action( 'template_redirect', 'redirect_canonical' );
+
+// Redirect all requests to index.php so the Vue app is loaded and 404s aren't thrown
+function remove_redirects() {
+  add_rewrite_rule( '^/(.+)/?', 'index.php', 'top' );
+}
+add_action( 'init', 'remove_redirects' );
 /**
  * Enqueue scripts and styles.
  */
@@ -153,13 +168,13 @@ function load_vue_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'load_vue_scripts', 100 );
 
-function add_data_attribute($tag, $handle) {
-	if ( 'vue-press' !== $handle )
-	 return $tag;
+// function add_data_attribute($tag, $handle) {
+// 	if ( 'vue-press' !== $handle )
+// 	 return $tag;
  
-	return str_replace( ' src', ' type="module" src', $tag );
- }
- add_filter('script_loader_tag', 'add_data_attribute', 10, 2);
+// 	return str_replace( ' src', ' type="module" src', $tag );
+//  }
+//  add_filter('script_loader_tag', 'add_data_attribute', 10, 2);
 
 
 /**

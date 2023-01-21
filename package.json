@@ -1,8 +1,6 @@
 {
   "name": "vuepress",
-  "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "watch": "vite build --watch",
@@ -10,10 +8,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.2.45"
+    "axios": "^1.2.3",
+    "pinia": "^2.0.29",
+    "vue": "^3.2.45",
+    "vue-meta": "^2.4.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
+    "dotenv": "^16.0.3",
+    "prettier": "^2.8.3",
     "sass": "^1.57.1",
     "vite": "^4.0.0",
     "vite-plugin-browser-sync": "^1.0.2",
