@@ -135,7 +135,31 @@ add_action( 'widgets_init', 'v_1_0_1_widgets_init' );
 /**
  * Enqueue scripts and styles.
  */
+function load_vue_scripts() {
+	wp_enqueue_script(
+	  'vue-press',
+	  get_stylesheet_directory_uri() . '/dist/assets/main.js',
+	  array( 'jquery' ),
+	  filemtime( get_stylesheet_directory() . '/dist/assets/main.js' ),
+	  true
+	);
+  
+	wp_enqueue_style(
+	  'vue-press',
+	  get_stylesheet_directory_uri() . '/dist/assets/main.css',
+	  null,
+	  filemtime( get_stylesheet_directory() . '/dist/assets/main.css' )
+	);
+}
+add_action( 'wp_enqueue_scripts', 'load_vue_scripts', 100 );
 
+function add_data_attribute($tag, $handle) {
+	if ( 'vue-press' !== $handle )
+	 return $tag;
+ 
+	return str_replace( ' src', ' type="module" src', $tag );
+ }
+ add_filter('script_loader_tag', 'add_data_attribute', 10, 2);
 
 
 /**
@@ -155,4 +179,8 @@ remove_action('wp_head', 'rel_canonical');// カノニカル
 remove_action('wp_print_styles', 'print_emoji_styles');// 絵文字に関するCSS
 remove_action('admin_print_scripts', 'print_emoji_detection_script');// 絵文字に関するJavaScript
 remove_action('admin_print_styles', 'print_emoji_styles');// 絵文字に関するCSS
+
+
+// Load scripts
+
 
