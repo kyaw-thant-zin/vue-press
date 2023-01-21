@@ -16,6 +16,7 @@
     "@vitejs/plugin-vue": "^4.0.0",
     "sass": "^1.57.1",
     "vite": "^4.0.0",
-    "vite-plugin-browser-sync": "^1.0.2"
+    "vite-plugin-browser-sync": "^1.0.2",
+    "vue-router": "^4.1.6"
   }
 }
