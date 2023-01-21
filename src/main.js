@@ -5,7 +5,7 @@ import { createMetaManager } from 'vue-meta';
 import App from './App.vue';
 import router from './router';
 
-import './assets/common.scss';
+import './assets/scss/common.scss';
 
 const app = createApp(App);
 const metaManager = createMetaManager();
