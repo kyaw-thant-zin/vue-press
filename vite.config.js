@@ -20,6 +20,16 @@ export default defineConfig({
     }),
     VitePluginBrowserSync()
   ],
+  configureServer: app => {
+    app.use(
+      require("sass").middleware({
+        src: __dirname,
+        dest: __dirname,
+        outputStyle: "compressed",
+        prefix: "/",
+      })
+    );
+  },
   resolve: {
     alias: {
       '@': resolve(__dirname, '/src'),
