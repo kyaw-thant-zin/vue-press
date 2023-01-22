@@ -24,10 +24,17 @@ useMeta({
   <RouterView v-slot="{ Component }">
     <template v-if="Component">
       <Transition name="fade">
-        <Suspense>
-          <!-- main content -->
-          <component :is="Component"></component>
-        </Suspense>
+        <KeepAlive>
+          <Suspense>
+            <!-- main content -->
+            <component :is="Component"></component>
+
+            <!-- loading state -->
+            <template #fallback>
+              Loading...
+            </template>
+          </Suspense>
+        </KeepAlive>
       </Transition>
     </template>
   </RouterView>
